@@ -42,7 +42,7 @@ jobs:
         curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
       
     - name: Build with Gradle
-      run: ./gradlew assembleDebug --stacktrace --debug
+      run: ./gradlew assembleDebug 
       
     - name: Upload Debug APK
       uses: actions/upload-artifact@v4
@@ -62,7 +62,7 @@ jobs:
         echo "keyPassword=android" >> signing.properties
         
         # 构建发布版本
-        ./gradlew assembleRelease --stacktrace --debug
+        ./gradlew assembleRelease 
       
     - name: Upload Release APK
       uses: actions/upload-artifact@v4
@@ -72,11 +72,11 @@ jobs:
         
     # 可选：添加测试步骤
     - name: Run Tests
-      run: ./gradlew test --stacktrace --debug
+      run: ./gradlew test 
       
     # 可选：添加代码质量检查
     - name: Run Lint
-      run: ./gradlew lint --stacktrace --debug
+      run: ./gradlew lint 
       
     - name: Upload Lint Results
       uses: actions/upload-artifact@v4
