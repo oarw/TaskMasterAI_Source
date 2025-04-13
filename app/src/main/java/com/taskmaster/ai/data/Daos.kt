@@ -40,6 +40,18 @@ interface TaskDao {
     
     @Delete
     suspend fun deleteTask(task: Task)
+    
+    // 同步获取所有任务
+    @Query("SELECT * FROM tasks ORDER BY dueDate ASC, priority DESC")
+    fun getAllTasksSync(): List<Task>
+    
+    // 删除所有任务
+    @Query("DELETE FROM tasks")
+    suspend fun deleteAllTasks()
+    
+    // 更新或插入任务（用于同步）
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun upsertTask(task: Task): Long
 }
 
 /**
@@ -61,6 +73,14 @@ interface CategoryDao {
     
     @Delete
     suspend fun deleteCategory(category: Category)
+    
+    // 同步获取所有分类
+    @Query("SELECT * FROM categories ORDER BY name ASC")
+    fun getAllCategoriesSync(): List<Category>
+    
+    // 删除所有分类
+    @Query("DELETE FROM categories")
+    suspend fun deleteAllCategories()
 }
 
 /**
@@ -85,6 +105,14 @@ interface PomodoroRecordDao {
     
     @Delete
     suspend fun deletePomodoroRecord(pomodoroRecord: PomodoroRecord)
+    
+    // 同步获取所有番茄钟记录
+    @Query("SELECT * FROM pomodoro_records ORDER BY startTime DESC")
+    fun getAllPomodoroRecordsSync(): List<PomodoroRecord>
+    
+    // 删除所有番茄钟记录
+    @Query("DELETE FROM pomodoro_records")
+    suspend fun deleteAllPomodoroRecords()
 }
 
 /**
@@ -112,6 +140,14 @@ interface AiProviderDao {
     
     @Query("UPDATE ai_providers SET isDefault = 1 WHERE id = :providerId")
     suspend fun setDefaultProvider(providerId: Long)
+    
+    // 同步获取所有AI提供商
+    @Query("SELECT * FROM ai_providers ORDER BY name ASC")
+    fun getAllAiProvidersSync(): List<AiProvider>
+    
+    // 删除所有AI提供商
+    @Query("DELETE FROM ai_providers")
+    suspend fun deleteAllAiProviders()
 }
 
 /**
@@ -127,4 +163,8 @@ interface UserSettingsDao {
     
     @Update
     suspend fun updateUserSettings(userSettings: UserSettings)
+    
+    // 同步获取用户设置
+    @Query("SELECT * FROM user_settings WHERE id = 1")
+    fun getUserSettingsSync(): UserSettings?
 }
