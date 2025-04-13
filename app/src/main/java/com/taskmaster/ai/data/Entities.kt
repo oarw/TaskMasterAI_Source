@@ -15,6 +15,7 @@ data class Task(
     val priority: Int = PRIORITY_NORMAL,
     val isCompleted: Boolean = false,
     val dueDate: Date? = null,
+    val completedDate: Date? = null,
     val categoryId: Long = 0,
     val createdDate: Date = Date(),
     val modifiedDate: Date = Date()
