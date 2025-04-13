@@ -6,6 +6,10 @@ import android.os.Environment
 import androidx.documentfile.provider.DocumentFile
 import com.taskmaster.ai.data.AppDatabase
 import com.taskmaster.ai.data.Task
+import com.taskmaster.ai.data.Category
+import com.taskmaster.ai.data.PomodoroRecord
+import com.taskmaster.ai.data.UserSettings
+import com.taskmaster.ai.data.AiProvider
 import com.taskmaster.ai.data.repository.TaskRepository
 import com.taskmaster.ai.data.repository.UserSettingsRepository
 import kotlinx.coroutines.Dispatchers
@@ -226,7 +230,7 @@ class BackupManager(
             jsonObject.put("description", task.description)
             jsonObject.put("isCompleted", task.isCompleted)
             jsonObject.put("priority", task.priority)
-            task.categoryId?.let { jsonObject.put("categoryId", it) }
+            jsonObject.put("categoryId", task.categoryId)
             task.dueDate?.let { jsonObject.put("dueDate", formatDate(it)) }
             task.completedDate?.let { jsonObject.put("completedDate", formatDate(it)) }
             jsonObject.put("createdDate", formatDate(task.createdDate))
@@ -340,7 +344,7 @@ class BackupManager(
                     description = jsonObject.optString("description", ""),
                     isCompleted = jsonObject.optBoolean("isCompleted", false),
                     priority = jsonObject.optInt("priority", Task.PRIORITY_NORMAL),
-                    categoryId = if (jsonObject.has("categoryId")) jsonObject.getLong("categoryId") else null,
+                    categoryId = jsonObject.optLong("categoryId", 0),
                     dueDate = if (jsonObject.has("dueDate")) parseDate(jsonObject.getString("dueDate")) else null,
                     completedDate = if (jsonObject.has("completedDate")) parseDate(jsonObject.getString("completedDate")) else null,
                     createdDate = parseDate(jsonObject.getString("createdDate")),
@@ -397,7 +401,7 @@ class BackupManager(
                 
                 val record = PomodoroRecord(
                     id = jsonObject.getLong("id"),
-                    taskId = if (jsonObject.has("taskId")) jsonObject.getLong("taskId") else null,
+                    taskId = if (jsonObject.has("taskId")) jsonObject.optLong("taskId") else null,
                     startTime = parseDate(jsonObject.getString("startTime")),
                     endTime = parseDate(jsonObject.getString("endTime")),
                     duration = jsonObject.getLong("duration"),
