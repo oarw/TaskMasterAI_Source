@@ -65,6 +65,22 @@ class SyncSettingsViewModel(
         _operationStatus.value = ""
     }
     
+    // 设置离线模式
+    fun setOfflineMode(enabled: Boolean) {
+        viewModelScope.launch {
+            try {
+                userSettingsRepository.updateOfflineMode(enabled)
+                if (enabled) {
+                    _operationStatus.value = "已启用离线模式"
+                } else {
+                    _operationStatus.value = "已禁用离线模式"
+                }
+            } catch (e: Exception) {
+                _operationStatus.value = "更新设置失败: ${e.message}"
+            }
+        }
+    }
+    
     /**
      * SyncSettingsViewModel工厂类
      */

@@ -84,10 +84,7 @@ class SyncSettingsFragment : Fragment() {
     
     private fun setupOfflineSwitch() {
         binding.switchOfflineMode.setOnCheckedChangeListener { _, isChecked ->
-            viewModel.userSettings.value?.let {
-                val userSettingsRepository = (requireActivity().application as TaskMasterApplication).userSettingsRepository
-                userSettingsRepository.updateOfflineMode(isChecked)
-            }
+            viewModel.setOfflineMode(isChecked)
         }
     }
     
