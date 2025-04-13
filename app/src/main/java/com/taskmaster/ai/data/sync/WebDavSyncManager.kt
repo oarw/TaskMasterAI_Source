@@ -6,6 +6,7 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.taskmaster.ai.data.Task
+import com.taskmaster.ai.data.UserSettings
 import com.taskmaster.ai.data.repository.TaskRepository
 import com.taskmaster.ai.data.repository.UserSettingsRepository
 import com.thegrizzlylabs.sardineandroid.Sardine
@@ -41,9 +42,7 @@ class WebDavSyncManager(
     init {
         // 从设置中加载上次同步时间
         userSettingsRepository.getUserSettings().observeForever { settings ->
-            settings?.lastSyncTime?.let {
-                _lastSyncTime.value = it
-            }
+            _lastSyncTime.value = settings?.lastSyncTime
         }
     }
     
@@ -123,9 +122,9 @@ class WebDavSyncManager(
         val updatedLocalTasks = taskRepository.getAllTasksSync()
         val tasksJson = convertTasksToJson(updatedLocalTasks)
         
-        val inputStream: InputStream = ByteArrayInputStream(tasksJson.toByteArray())
+        val inputStream = ByteArrayInputStream(tasksJson.toByteArray())
         withContext(Dispatchers.IO) {
-            sardine.put(tasksUrl, inputStream, "application/json")
+            sardine.put(tasksUrl, inputStream.readBytes(), "application/json")
         }
     }
     
@@ -147,7 +146,7 @@ class WebDavSyncManager(
                     description = jsonObject.optString("description", ""),
                     isCompleted = jsonObject.optBoolean("isCompleted", false),
                     priority = jsonObject.optInt("priority", Task.PRIORITY_NORMAL),
-                    categoryId = if (jsonObject.has("categoryId")) jsonObject.getLong("categoryId") else null,
+                    categoryId = jsonObject.optLong("categoryId", 0),
                     dueDate = if (jsonObject.has("dueDate")) parseDate(jsonObject.getString("dueDate")) else null,
                     completedDate = if (jsonObject.has("completedDate")) parseDate(jsonObject.getString("completedDate")) else null,
                     createdDate = parseDate(jsonObject.getString("createdDate")),
@@ -177,7 +176,7 @@ class WebDavSyncManager(
             jsonObject.put("description", task.description)
             jsonObject.put("isCompleted", task.isCompleted)
             jsonObject.put("priority", task.priority)
-            task.categoryId?.let { jsonObject.put("categoryId", it) }
+            jsonObject.put("categoryId", task.categoryId)
             task.dueDate?.let { jsonObject.put("dueDate", formatDate(it)) }
             task.completedDate?.let { jsonObject.put("completedDate", formatDate(it)) }
             jsonObject.put("createdDate", formatDate(task.createdDate))
