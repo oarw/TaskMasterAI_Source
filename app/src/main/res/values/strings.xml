@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">任务大师AI</string>
+    
+    <!-- 通用 -->
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="confirm">确认</string>
+    <string name="back">返回</string>
+    <string name="next">下一步</string>
+    <string name="done">完成</string>
+    
+    <!-- 底部导航 -->
+    <string name="nav_tasks">任务</string>
+    <string name="nav_calendar">日历</string>
+    <string name="nav_pomodoro">番茄钟</string>
+    <string name="nav_statistics">统计</string>
+    <string name="nav_settings">设置</string>
+    
+    <!-- 任务相关 -->
+    <string name="task_title">任务标题</string>
+    <string name="task_description">任务描述</string>
+    <string name="task_priority">优先级</string>
+    <string name="task_deadline">截止日期</string>
+    <string name="task_category">分类</string>
+    <string name="task_add">添加任务</string>
+    <string name="task_edit">编辑任务</string>
+    <string name="task_delete">删除任务</string>
+    <string name="task_complete">完成任务</string>
+    <string name="task_incomplete">未完成</string>
+    <string name="task_in_progress">进行中</string>
+    <string name="task_completed">已完成</string>
+    
+    <!-- 优先级 -->
+    <string name="priority_high">高</string>
+    <string name="priority_medium">中</string>
+    <string name="priority_low">低</string>
+    
+    <!-- 番茄钟 -->
+    <string name="pomodoro_start">开始</string>
+    <string name="pomodoro_pause">暂停</string>
+    <string name="pomodoro_resume">继续</string>
+    <string name="pomodoro_stop">停止</string>
+    <string name="pomodoro_work">工作时间</string>
+    <string name="pomodoro_short_break">短休息</string>
+    <string name="pomodoro_long_break">长休息</string>
+    <string name="pomodoro_cycles">周期</string>
+    <string name="pomodoro_completed">已完成</string>
+    
+    <!-- 统计 -->
+    <string name="stats_daily">日统计</string>
+    <string name="stats_weekly">周统计</string>
+    <string name="stats_monthly">月统计</string>
+    <string name="stats_tasks_completed">已完成任务</string>
+    <string name="stats_time_spent">花费时间</string>
+    <string name="stats_productivity">生产力</string>
+    
+    <!-- AI功能 -->
+    <string name="ai_task_breakdown">任务拆解</string>
+    <string name="ai_time_estimation">时间估算</string>
+    <string name="ai_priority_suggestion">优先级建议</string>
+    <string name="ai_planning">智能规划</string>
+    <string name="ai_weekly_summary">周总结</string>
+    <string name="ai_provider_settings">AI提供商设置</string>
+    <string name="ai_api_key">API密钥</string>
+    <string name="ai_api_url">API地址</string>
+    <string name="ai_test_connection">测试连接</string>
+    
+    <!-- 设置 -->
+    <string name="settings_theme">主题</string>
+    <string name="settings_dark_mode">暗黑模式</string>
+    <string name="settings_light_mode">浅色模式</string>
+    <string name="settings_system_default">跟随系统</string>
+    <string name="settings_notifications">通知设置</string>
+    <string name="settings_backup">备份与恢复</string>
+    <string name="settings_sync">同步</string>
+    <string name="settings_language">语言</string>
+    <string name="settings_about">关于</string>
+    
+    <!-- 同步与备份 -->
+    <string name="sync_webdav">WebDAV同步</string>
+    <string name="sync_webdav_url">WebDAV地址</string>
+    <string name="sync_username">用户名</string>
+    <string name="sync_password">密码</string>
+    <string name="sync_auto">自动同步</string>
+    <string name="backup_create">创建备份</string>
+    <string name="backup_restore">恢复备份</string>
+    <string name="backup_auto">自动备份</string>
+    
+    <!-- 通知 -->
+    <string name="notification_task_reminder">任务提醒</string>
+    <string name="notification_daily_plan">每日计划</string>
+    <string name="notification_weekly_plan">每周计划</string>
+    <string name="notification_pomodoro">番茄钟提醒</string>
+</resources>

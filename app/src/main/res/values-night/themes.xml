@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 暗黑模式主题 -->
+    <style name="Theme.TaskMasterAI" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- 主要颜色 -->
+        <item name="colorPrimary">@color/primary_dark_mode</item>
+        <item name="colorPrimaryVariant">@color/primary_dark_dark_mode</item>
+        <item name="colorOnPrimary">@color/white</item>
+        
+        <!-- 次要颜色 -->
+        <item name="colorSecondary">@color/accent_dark_mode</item>
+        <item name="colorSecondaryVariant">@color/accent_dark_mode</item>
+        <item name="colorOnSecondary">@color/black</item>
+        
+        <!-- 状态栏颜色 -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        
+        <!-- 文本颜色 -->
+        <item name="android:textColorPrimary">@color/text_primary_dark_mode</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark_mode</item>
+        
+        <!-- 背景颜色 -->
+        <item name="android:windowBackground">@color/background_dark_mode</item>
+        
+        <!-- 字体 -->
+        <item name="fontFamily">sans-serif</item>
+    </style>
+</resources>

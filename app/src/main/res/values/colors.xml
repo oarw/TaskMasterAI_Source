@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基础颜色 -->
+    <color name="primary">#3F51B5</color>
+    <color name="primary_dark">#303F9F</color>
+    <color name="primary_light">#C5CAE9</color>
+    <color name="accent">#FF4081</color>
+    <color name="accent_light">#FF80AB</color>
+    
+    <!-- 文本颜色 -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="text_hint">#BDBDBD</color>
+    
+    <!-- 背景颜色 -->
+    <color name="background">#FAFAFA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="card_background">#FFFFFF</color>
+    
+    <!-- 任务优先级颜色 -->
+    <color name="priority_high">#F44336</color>
+    <color name="priority_medium">#FF9800</color>
+    <color name="priority_low">#4CAF50</color>
+    
+    <!-- 番茄钟状态颜色 -->
+    <color name="pomodoro_work">#F44336</color>
+    <color name="pomodoro_short_break">#4CAF50</color>
+    <color name="pomodoro_long_break">#2196F3</color>
+    
+    <!-- 图表颜色 -->
+    <color name="chart_color_1">#3F51B5</color>
+    <color name="chart_color_2">#FF4081</color>
+    <color name="chart_color_3">#4CAF50</color>
+    <color name="chart_color_4">#FFC107</color>
+    <color name="chart_color_5">#9C27B0</color>
+    
+    <!-- 分隔线颜色 -->
+    <color name="divider">#EEEEEE</color>
+    
+    <!-- 徽章背景颜色 -->
+    <color name="badge_background">#3F51B5</color>
+</resources>
