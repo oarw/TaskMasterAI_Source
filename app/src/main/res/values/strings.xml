@@ -32,11 +32,13 @@
     <string name="task_incomplete">未完成</string>
     <string name="task_in_progress">进行中</string>
     <string name="task_completed">已完成</string>
+    <string name="task_details">任务详情</string>
     
     <!-- 优先级 -->
     <string name="priority_high">高</string>
     <string name="priority_medium">中</string>
     <string name="priority_low">低</string>
+    <string name="priority_suggestion">优先级建议</string>
     
     <!-- 番茄钟 -->
     <string name="pomodoro_start">开始</string>
@@ -56,6 +58,8 @@
     <string name="stats_tasks_completed">已完成任务</string>
     <string name="stats_time_spent">花费时间</string>
     <string name="stats_productivity">生产力</string>
+    <string name="time_range">时间范围</string>
+    <string name="today">今天</string>
     
     <!-- AI功能 -->
     <string name="ai_task_breakdown">任务拆解</string>
@@ -67,6 +71,19 @@
     <string name="ai_api_key">API密钥</string>
     <string name="ai_api_url">API地址</string>
     <string name="ai_test_connection">测试连接</string>
+    <string name="provider_name">提供商名称</string>
+    <string name="api_url">API地址</string>
+    <string name="api_key">API密钥</string>
+    <string name="no_ai_providers">暂无AI提供商，请添加</string>
+    <string name="add_ai_provider">添加AI提供商</string>
+    <string name="edit_ai_provider">编辑AI提供商</string>
+    <string name="ai_provider">AI提供商</string>
+    <string name="decompose_task">任务分解</string>
+    <string name="estimate_time">估计时间</string>
+    <string name="suggest_priority">建议优先级</string>
+    <string name="subtasks">子任务</string>
+    <string name="time_estimation">时间估算</string>
+    <string name="create_tasks">创建任务</string>
     
     <!-- 设置 -->
     <string name="settings_theme">主题</string>
@@ -88,6 +105,10 @@
     <string name="backup_create">创建备份</string>
     <string name="backup_restore">恢复备份</string>
     <string name="backup_auto">自动备份</string>
+    <string name="select_due_date">选择截止日期</string>
+    <string name="no_backups_found">未找到备份</string>
+    <string name="create_backup">创建备份</string>
+    <string name="restore_from_file">从文件恢复</string>
     
     <!-- 通知 -->
     <string name="notification_task_reminder">任务提醒</string>
