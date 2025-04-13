@@ -11,6 +11,7 @@
     <string name="back">返回</string>
     <string name="next">下一步</string>
     <string name="done">完成</string>
+    <string name="status">状态</string>
     
     <!-- 底部导航 -->
     <string name="nav_tasks">任务</string>
@@ -114,6 +115,7 @@
     <string name="sync_username">用户名</string>
     <string name="sync_password">密码</string>
     <string name="sync_auto">自动同步</string>
+    <string name="sync_now">立即同步</string>
     <string name="backup_create">创建备份</string>
     <string name="backup_restore">恢复备份</string>
     <string name="backup_auto">自动备份</string>
@@ -128,6 +130,9 @@
     <string name="save_settings">保存设置</string>
     <string name="sync_status">同步状态</string>
     <string name="last_sync">上次同步</string>
+    <string name="offline_mode">离线模式</string>
+    <string name="offline_mode_description">启用离线模式后，应用将不会尝试与服务器同步数据，适合无网络环境使用</string>
+    <string name="enable_offline_mode">启用离线模式</string>
     
     <!-- 通知 -->
     <string name="notification_task_reminder">任务提醒</string>
