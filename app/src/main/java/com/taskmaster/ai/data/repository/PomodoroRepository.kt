@@ -13,7 +13,7 @@ class PomodoroRepository(private val pomodoroRecordDao: PomodoroRecordDao) {
     // 获取所有番茄钟记录
     val allPomodoroRecords: LiveData<List<PomodoroRecord>> = pomodoroRecordDao.getAllPomodoroRecords()
     
-    // 根据任务ID获取番茄钟记录
+    // 根据任务获取番茄钟记录
     fun getPomodoroRecordsByTask(taskId: Long): LiveData<List<PomodoroRecord>> {
         return pomodoroRecordDao.getPomodoroRecordsByTask(taskId)
     }
@@ -36,5 +36,15 @@ class PomodoroRepository(private val pomodoroRecordDao: PomodoroRecordDao) {
     // 删除番茄钟记录
     suspend fun deletePomodoroRecord(pomodoroRecord: PomodoroRecord) {
         pomodoroRecordDao.deletePomodoroRecord(pomodoroRecord)
+    }
+    
+    // 获取所有番茄钟记录（同步）
+    fun getAllPomodoroRecordsSync(): List<PomodoroRecord> {
+        return pomodoroRecordDao.getAllPomodoroRecordsSync()
+    }
+    
+    // 删除所有番茄钟记录
+    suspend fun deleteAllPomodoroRecords() {
+        pomodoroRecordDao.deleteAllPomodoroRecords()
     }
 }
