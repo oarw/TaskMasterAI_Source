@@ -78,7 +78,9 @@ data class UserSettings(
     val webDavPassword: String = "",
     val autoSyncEnabled: Boolean = false,
     val autoBackupEnabled: Boolean = false,
-    val notificationsEnabled: Boolean = true
+    val notificationsEnabled: Boolean = true,
+    val lastSyncTime: Date? = null,
+    val offlineModeEnabled: Boolean = false
 ) {
     companion object {
         const val MODE_LIGHT = 0
