@@ -1,0 +1,85 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:  # 允许手动触发工作流
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: gradle
+        
+    - name: Set up Android SDK
+      uses: android-actions/setup-android@v2
+      
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Setup Gradle Wrapper
+      # 确保gradle wrapper正确设置
+      run: |
+        mkdir -p gradle/wrapper
+        echo "distributionBase=GRADLE_USER_HOME" > gradle/wrapper/gradle-wrapper.properties
+        echo "distributionPath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
+        echo "distributionUrl=https\://services.gradle.org/distributions/gradle-7.5-bin.zip" >> gradle/wrapper/gradle-wrapper.properties
+        echo "zipStoreBase=GRADLE_USER_HOME" >> gradle/wrapper/gradle-wrapper.properties
+        echo "zipStorePath=wrapper/dists" >> gradle/wrapper/gradle-wrapper.properties
+        
+        # 下载gradle-wrapper.jar
+        curl -L -o gradle/wrapper/gradle-wrapper.jar https://github.com/gradle/gradle/raw/master/gradle/wrapper/gradle-wrapper.jar
+      
+    - name: Build with Gradle
+      run: ./gradlew assembleDebug
+      
+    - name: Upload Debug APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/app-debug.apk
+        
+    - name: Build Release APK
+      run: |
+        # 创建一个临时的签名密钥用于构建
+        keytool -genkey -v -keystore keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias app -storepass android -keypass android -dname "CN=TaskMasterAI, OU=Development, O=TaskMasterAI, L=Beijing, S=Beijing, C=CN"
+        
+        # 创建签名配置文件
+        echo "storeFile=../keystore.jks" > signing.properties
+        echo "storePassword=android" >> signing.properties
+        echo "keyAlias=app" >> signing.properties
+        echo "keyPassword=android" >> signing.properties
+        
+        # 构建发布版本
+        ./gradlew assembleRelease
+      
+    - name: Upload Release APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: app-release
+        path: app/build/outputs/apk/release/app-release.apk
+        
+    # 可选：添加测试步骤
+    - name: Run Tests
+      run: ./gradlew test
+      
+    # 可选：添加代码质量检查
+    - name: Run Lint
+      run: ./gradlew lint
+      
+    - name: Upload Lint Results
+      uses: actions/upload-artifact@v4
+      with:
+        name: lint-results
+        path: app/build/reports/lint-results-debug.html
