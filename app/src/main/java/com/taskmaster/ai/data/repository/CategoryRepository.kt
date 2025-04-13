@@ -5,7 +5,7 @@ import com.taskmaster.ai.data.Category
 import com.taskmaster.ai.data.CategoryDao
 
 /**
- * 任务分类仓库类
+ * 分类仓库类
  */
 class CategoryRepository(private val categoryDao: CategoryDao) {
     
@@ -30,5 +30,15 @@ class CategoryRepository(private val categoryDao: CategoryDao) {
     // 删除分类
     suspend fun deleteCategory(category: Category) {
         categoryDao.deleteCategory(category)
+    }
+    
+    // 同步获取所有分类
+    fun getAllCategoriesSync(): List<Category> {
+        return categoryDao.getAllCategoriesSync()
+    }
+    
+    // 删除所有分类
+    suspend fun deleteAllCategories() {
+        categoryDao.deleteAllCategories()
     }
 }

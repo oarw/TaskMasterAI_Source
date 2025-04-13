@@ -35,4 +35,14 @@ class AiProviderRepository(private val aiProviderDao: AiProviderDao) {
         aiProviderDao.clearDefaultProvider()
         aiProviderDao.setDefaultProvider(providerId)
     }
+    
+    // 获取所有AI提供商（同步）
+    fun getAllAiProvidersSync(): List<AiProvider> {
+        return aiProviderDao.getAllAiProvidersSync()
+    }
+    
+    // 删除所有AI提供商
+    suspend fun deleteAllAiProviders() {
+        aiProviderDao.deleteAllAiProviders()
+    }
 }
