@@ -12,6 +12,7 @@
     <string name="next">下一步</string>
     <string name="done">完成</string>
     <string name="status">状态</string>
+    <string name="restore">恢复</string>
     
     <!-- 底部导航 -->
     <string name="nav_tasks">任务</string>
@@ -91,6 +92,8 @@
     <string name="add_ai_provider">添加AI提供商</string>
     <string name="edit_ai_provider">编辑AI提供商</string>
     <string name="ai_provider">AI提供商</string>
+    <string name="default_provider">默认</string>
+    <string name="set_as_default">设为默认</string>
     <string name="decompose_task">任务分解</string>
     <string name="estimate_time">估计时间</string>
     <string name="suggest_priority">建议优先级</string>
