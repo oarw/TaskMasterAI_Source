@@ -238,8 +238,89 @@ class BackupManager(
         return jsonArray.toString()
     }
     
-    // 其他转换方法（convertCategoriesToJson, convertPomodoroRecordsToJson等）
-    // 为了简洁，这里省略了具体实现
+    /**
+     * 将分类转换为JSON
+     */
+    private fun convertCategoriesToJson(categories: List<Category>): String {
+        val jsonArray = JSONArray()
+        
+        for (category in categories) {
+            val jsonObject = JSONObject()
+            
+            jsonObject.put("id", category.id)
+            jsonObject.put("name", category.name)
+            jsonObject.put("color", category.color)
+            
+            jsonArray.put(jsonObject)
+        }
+        
+        return jsonArray.toString()
+    }
+    
+    /**
+     * 将番茄钟记录转换为JSON
+     */
+    private fun convertPomodoroRecordsToJson(pomodoroRecords: List<PomodoroRecord>): String {
+        val jsonArray = JSONArray()
+        
+        for (record in pomodoroRecords) {
+            val jsonObject = JSONObject()
+            
+            jsonObject.put("id", record.id)
+            record.taskId?.let { jsonObject.put("taskId", it) }
+            jsonObject.put("startTime", formatDate(record.startTime))
+            jsonObject.put("endTime", formatDate(record.endTime))
+            jsonObject.put("duration", record.duration)
+            jsonObject.put("isCompleted", record.isCompleted)
+            
+            jsonArray.put(jsonObject)
+        }
+        
+        return jsonArray.toString()
+    }
+    
+    /**
+     * 将用户设置转换为JSON
+     */
+    private fun convertSettingsToJson(settings: UserSettings): String {
+        val jsonObject = JSONObject()
+        
+        jsonObject.put("id", settings.id)
+        jsonObject.put("darkMode", settings.darkMode)
+        jsonObject.put("pomodoroWorkDuration", settings.pomodoroWorkDuration)
+        jsonObject.put("pomodoroShortBreakDuration", settings.pomodoroShortBreakDuration)
+        jsonObject.put("pomodoroLongBreakDuration", settings.pomodoroLongBreakDuration)
+        jsonObject.put("pomodoroCyclesBeforeLongBreak", settings.pomodoroCyclesBeforeLongBreak)
+        jsonObject.put("webDavUrl", settings.webDavUrl)
+        jsonObject.put("webDavUsername", settings.webDavUsername)
+        jsonObject.put("webDavPassword", settings.webDavPassword)
+        jsonObject.put("autoSyncEnabled", settings.autoSyncEnabled)
+        jsonObject.put("autoBackupEnabled", settings.autoBackupEnabled)
+        jsonObject.put("notificationsEnabled", settings.notificationsEnabled)
+        
+        return jsonObject.toString()
+    }
+    
+    /**
+     * 将AI提供商转换为JSON
+     */
+    private fun convertAiProvidersToJson(aiProviders: List<AiProvider>): String {
+        val jsonArray = JSONArray()
+        
+        for (provider in aiProviders) {
+            val jsonObject = JSONObject()
+            
+            jsonObject.put("id", provider.id)
+            jsonObject.put("name", provider.name)
+            jsonObject.put("apiUrl", provider.apiUrl)
+            jsonObject.put("apiKey", provider.apiKey)
+            jsonObject.put("isDefault", provider.isDefault)
+            
+            jsonArray.put(jsonObject)
+        }
+        
+        return jsonArray.toString()
+    }
     
     /**
      * 解析JSON中的任务
@@ -275,8 +356,117 @@ class BackupManager(
         return tasks
     }
     
-    // 其他解析方法（parseCategoriesFromJson, parsePomodoroRecordsFromJson等）
-    // 为了简洁，这里省略了具体实现
+    /**
+     * 解析JSON中的分类
+     */
+    private fun parseCategoriesFromJson(json: String): List<Category> {
+        val categories = mutableListOf<Category>()
+        
+        try {
+            val jsonArray = JSONArray(json)
+            
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                
+                val category = Category(
+                    id = jsonObject.getLong("id"),
+                    name = jsonObject.getString("name"),
+                    color = jsonObject.getInt("color")
+                )
+                
+                categories.add(category)
+            }
+        } catch (e: Exception) {
+            // 解析错误，返回空列表
+        }
+        
+        return categories
+    }
+    
+    /**
+     * 解析JSON中的番茄钟记录
+     */
+    private fun parsePomodoroRecordsFromJson(json: String): List<PomodoroRecord> {
+        val records = mutableListOf<PomodoroRecord>()
+        
+        try {
+            val jsonArray = JSONArray(json)
+            
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                
+                val record = PomodoroRecord(
+                    id = jsonObject.getLong("id"),
+                    taskId = if (jsonObject.has("taskId")) jsonObject.getLong("taskId") else null,
+                    startTime = parseDate(jsonObject.getString("startTime")),
+                    endTime = parseDate(jsonObject.getString("endTime")),
+                    duration = jsonObject.getLong("duration"),
+                    isCompleted = jsonObject.optBoolean("isCompleted", true)
+                )
+                
+                records.add(record)
+            }
+        } catch (e: Exception) {
+            // 解析错误，返回空列表
+        }
+        
+        return records
+    }
+    
+    /**
+     * 解析JSON中的用户设置
+     */
+    private fun parseSettingsFromJson(json: String): UserSettings? {
+        return try {
+            val jsonObject = JSONObject(json)
+            
+            UserSettings(
+                id = jsonObject.getInt("id"),
+                darkMode = jsonObject.getInt("darkMode"),
+                pomodoroWorkDuration = jsonObject.getInt("pomodoroWorkDuration"),
+                pomodoroShortBreakDuration = jsonObject.getInt("pomodoroShortBreakDuration"),
+                pomodoroLongBreakDuration = jsonObject.getInt("pomodoroLongBreakDuration"),
+                pomodoroCyclesBeforeLongBreak = jsonObject.getInt("pomodoroCyclesBeforeLongBreak"),
+                webDavUrl = jsonObject.optString("webDavUrl", ""),
+                webDavUsername = jsonObject.optString("webDavUsername", ""),
+                webDavPassword = jsonObject.optString("webDavPassword", ""),
+                autoSyncEnabled = jsonObject.optBoolean("autoSyncEnabled", false),
+                autoBackupEnabled = jsonObject.optBoolean("autoBackupEnabled", false),
+                notificationsEnabled = jsonObject.optBoolean("notificationsEnabled", true)
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+    
+    /**
+     * 解析JSON中的AI提供商
+     */
+    private fun parseAiProvidersFromJson(json: String): List<AiProvider> {
+        val providers = mutableListOf<AiProvider>()
+        
+        try {
+            val jsonArray = JSONArray(json)
+            
+            for (i in 0 until jsonArray.length()) {
+                val jsonObject = jsonArray.getJSONObject(i)
+                
+                val provider = AiProvider(
+                    id = jsonObject.getLong("id"),
+                    name = jsonObject.getString("name"),
+                    apiUrl = jsonObject.getString("apiUrl"),
+                    apiKey = jsonObject.getString("apiKey"),
+                    isDefault = jsonObject.optBoolean("isDefault", false)
+                )
+                
+                providers.add(provider)
+            }
+        } catch (e: Exception) {
+            // 解析错误，返回空列表
+        }
+        
+        return providers
+    }
     
     /**
      * 恢复任务
@@ -291,8 +481,51 @@ class BackupManager(
         }
     }
     
-    // 其他恢复方法（restoreCategories, restorePomodoroRecords等）
-    // 为了简洁，这里省略了具体实现
+    /**
+     * 恢复分类
+     */
+    private suspend fun restoreCategories(categories: List<Category>) {
+        // 清空现有分类
+        database.categoryDao().deleteAllCategories()
+        
+        // 恢复备份的分类
+        for (category in categories) {
+            database.categoryDao().insertCategory(category)
+        }
+    }
+    
+    /**
+     * 恢复番茄钟记录
+     */
+    private suspend fun restorePomodoroRecords(records: List<PomodoroRecord>) {
+        // 清空现有番茄钟记录
+        database.pomodoroRecordDao().deleteAllPomodoroRecords()
+        
+        // 恢复备份的番茄钟记录
+        for (record in records) {
+            database.pomodoroRecordDao().insertPomodoroRecord(record)
+        }
+    }
+    
+    /**
+     * 恢复用户设置
+     */
+    private suspend fun restoreSettings(settings: UserSettings) {
+        database.userSettingsDao().insertUserSettings(settings)
+    }
+    
+    /**
+     * 恢复AI提供商
+     */
+    private suspend fun restoreAiProviders(providers: List<AiProvider>) {
+        // 清空现有AI提供商
+        database.aiProviderDao().deleteAllAiProviders()
+        
+        // 恢复备份的AI提供商
+        for (provider in providers) {
+            database.aiProviderDao().insertAiProvider(provider)
+        }
+    }
     
     /**
      * 格式化日期为字符串
