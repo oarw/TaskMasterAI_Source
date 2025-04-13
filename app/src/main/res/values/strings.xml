@@ -13,6 +13,8 @@
     <string name="done">完成</string>
     <string name="status">状态</string>
     <string name="restore">恢复</string>
+    <string name="error_field_required">此字段为必填项</string>
+    <string name="error_invalid_url">无效的URL地址</string>
     
     <!-- 底部导航 -->
     <string name="nav_tasks">任务</string>
@@ -142,4 +144,17 @@
     <string name="notification_daily_plan">每日计划</string>
     <string name="notification_weekly_plan">每周计划</string>
     <string name="notification_pomodoro">番茄钟提醒</string>
+    
+    <!-- 通知渠道 -->
+    <string name="channel_task_reminders">任务提醒</string>
+    <string name="channel_task_reminders_description">提醒您即将到期的任务</string>
+    <string name="channel_pomodoro">番茄钟</string>
+    <string name="channel_pomodoro_description">番茄钟工作和休息时间提醒</string>
+    <string name="channel_sync">同步通知</string>
+    <string name="channel_sync_description">数据同步状态通知</string>
+    
+    <!-- 通知图标 -->
+    <string name="ic_notification_task">任务通知图标</string>
+    <string name="ic_notification_pomodoro">番茄钟通知图标</string>
+    <string name="ic_notification_sync">同步通知图标</string>
 </resources>
