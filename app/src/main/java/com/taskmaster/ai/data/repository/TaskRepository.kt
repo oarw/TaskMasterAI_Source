@@ -48,4 +48,14 @@ class TaskRepository(private val taskDao: TaskDao) {
     suspend fun deleteTask(task: Task) {
         taskDao.deleteTask(task)
     }
+    
+    // 同步获取所有任务
+    fun getAllTasksSync(): List<Task> {
+        return taskDao.getAllTasksSync()
+    }
+    
+    // 更新或插入任务（用于同步）
+    suspend fun upsertTask(task: Task): Long {
+        return taskDao.upsertTask(task)
+    }
 }
