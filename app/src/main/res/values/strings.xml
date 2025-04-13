@@ -50,6 +50,7 @@
     <string name="pomodoro_long_break">长休息</string>
     <string name="pomodoro_cycles">周期</string>
     <string name="pomodoro_completed">已完成</string>
+    <string name="completed_pomodoros">已完成番茄钟</string>
     
     <!-- 统计 -->
     <string name="stats_daily">日统计</string>
@@ -60,6 +61,17 @@
     <string name="stats_productivity">生产力</string>
     <string name="time_range">时间范围</string>
     <string name="today">今天</string>
+    <string name="this_week">本周</string>
+    <string name="this_month">本月</string>
+    <string name="custom">自定义</string>
+    <string name="start_date">开始日期</string>
+    <string name="end_date">结束日期</string>
+    <string name="summary">总结</string>
+    <string name="total_focus_time">总专注时间</string>
+    <string name="completed_tasks">已完成任务</string>
+    <string name="focus_time_by_task">按任务统计专注时间</string>
+    <string name="focus_time_by_date">按日期统计专注时间</string>
+    <string name="no_data_available">暂无数据</string>
     
     <!-- AI功能 -->
     <string name="ai_task_breakdown">任务拆解</string>
@@ -109,6 +121,13 @@
     <string name="no_backups_found">未找到备份</string>
     <string name="create_backup">创建备份</string>
     <string name="restore_from_file">从文件恢复</string>
+    <string name="webdav_settings">WebDAV设置</string>
+    <string name="webdav_url">WebDAV地址</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
+    <string name="save_settings">保存设置</string>
+    <string name="sync_status">同步状态</string>
+    <string name="last_sync">上次同步</string>
     
     <!-- 通知 -->
     <string name="notification_task_reminder">任务提醒</string>
