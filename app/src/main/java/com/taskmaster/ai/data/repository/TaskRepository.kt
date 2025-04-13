@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import com.taskmaster.ai.data.Task
 import com.taskmaster.ai.data.TaskDao
 import java.util.Date
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * 任务仓库类
@@ -57,5 +59,17 @@ class TaskRepository(private val taskDao: TaskDao) {
     // 更新或插入任务（用于同步）
     suspend fun upsertTask(task: Task): Long {
         return taskDao.upsertTask(task)
+    }
+
+    // 同步获取指定日期范围的任务
+    suspend fun getTasksByDueDateRange(startDate: Date, endDate: Date): List<Task> {
+        return withContext(Dispatchers.IO) {
+            taskDao.getTasksByDateRangeSync(startDate, endDate)
+        }
+    }
+
+    // 删除所有任务
+    suspend fun deleteAllTasks() {
+        taskDao.deleteAllTasks()
     }
 }

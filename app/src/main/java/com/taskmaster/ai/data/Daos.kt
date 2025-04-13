@@ -45,6 +45,10 @@ interface TaskDao {
     @Query("SELECT * FROM tasks ORDER BY dueDate ASC, priority DESC")
     fun getAllTasksSync(): List<Task>
     
+    // 同步获取指定日期范围的任务
+    @Query("SELECT * FROM tasks WHERE dueDate BETWEEN :startDate AND :endDate ORDER BY dueDate ASC, priority DESC")
+    fun getTasksByDateRangeSync(startDate: Date, endDate: Date): List<Task>
+    
     // 删除所有任务
     @Query("DELETE FROM tasks")
     suspend fun deleteAllTasks()
