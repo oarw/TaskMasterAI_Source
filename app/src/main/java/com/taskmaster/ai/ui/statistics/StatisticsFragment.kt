@@ -300,9 +300,11 @@ class StatisticsFragment : Fragment() {
         val data = PieData(dataSet).apply {
             setValueTextSize(11f)
             setValueTextColor(Color.BLACK)
-            setValueFormatter { value, _, _, _ ->
-                String.format("%.1f小时", value)
-            }
+            setValueFormatter(object : com.github.mikephil.charting.formatter.ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return String.format("%.1f小时", value)
+                }
+            })
         }
         
         taskPieChart?.data = data
@@ -340,8 +342,10 @@ class StatisticsFragment : Fragment() {
             setColors(*ColorTemplate.MATERIAL_COLORS)
             setDrawValues(true)
             valueTextSize = 10f
-            valueFormatter = { value, _, _, _ ->
-                String.format("%.1f小时", value)
+            valueFormatter = object : com.github.mikephil.charting.formatter.ValueFormatter() {
+                override fun getFormattedValue(value: Float): String {
+                    return String.format("%.1f小时", value)
+                }
             }
         }
         

@@ -87,7 +87,9 @@ class PomodoroViewModel(
     
     // 暂停番茄钟
     fun pausePomodoro() {
-        if (_pomodoroState.value != POMODORO_STATE_WORKING && _pomodoroState.value != POMODORO_STATE_BREAK) {
+        if (_pomodoroState.value != POMODORO_STATE_WORKING && 
+            _pomodoroState.value != POMODORO_STATE_SHORT_BREAK && 
+            _pomodoroState.value != POMODORO_STATE_LONG_BREAK) {
             return
         }
         
